@@ -1,0 +1,4 @@
+name: MasterDungeon
+main: neu.masterdungeon.MasterDungeon
+version: 1.0-SNAPSHOT
+authors: [Phạm Văn Linh, Lương Tuấn Anh]
