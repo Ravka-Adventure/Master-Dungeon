@@ -61,9 +61,13 @@ public abstract class Dungeon implements DungeonAction, Cloneable {
     }
 
     public void updateParticipants() {
-        this.participants = this.participants.stream().filter(
-                Player::isOnline
-        ).collect(Collectors.toList());
+        Iterator<Player> iterator = getParticipants().iterator();
+        while(iterator.hasNext()) {
+            Player player = iterator.next();
+            if(!player.isOnline()) {
+                left(player);
+            }
+        }
 
         if (this.participants.isEmpty()) {
             this.dungeonState = DungeonState.CLOSING;

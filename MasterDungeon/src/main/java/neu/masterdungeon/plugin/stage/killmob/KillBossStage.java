@@ -35,7 +35,7 @@ public class KillBossStage extends MapAmountStage<String, Integer> implements Ti
     }
 
     @Override
-    public void check(Dungeon dungeon) {
+    public void run(Dungeon dungeon) {
         this.isFinished = bossInstance.isDead();
     }
 }

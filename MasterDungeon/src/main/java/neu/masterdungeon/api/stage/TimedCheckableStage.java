@@ -4,6 +4,6 @@ import neu.masterdungeon.api.Dungeon;
 
 public interface TimedCheckableStage {
 
-    public void check(Dungeon dungeon);
+    public void run(Dungeon dungeon);
 
 }

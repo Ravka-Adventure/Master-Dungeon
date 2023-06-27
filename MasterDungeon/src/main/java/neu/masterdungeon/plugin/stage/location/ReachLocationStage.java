@@ -43,7 +43,7 @@ public class ReachLocationStage extends AbstractStage implements TimedCheckableS
     }
 
     @Override
-    public void check(Dungeon dungeon) {
+    public void run(Dungeon dungeon) {
         for(var p : dungeon.getParticipants()) {
             if(destination.distance(p.getLocation()) <= DISTANCE_ERROR) {
                 finished = true;

@@ -51,7 +51,7 @@ public class FindItemStage extends MapAmountStage<String, Integer> implements Ti
     }
 
     @Override
-    public void check(Dungeon dungeon) {
+    public void run(Dungeon dungeon) {
         Map<String, Long> items = dungeon.getParticipants().stream().map(p -> p.getInventory().getContents())
                 .flatMap(Stream::of)
                 .collect(Collectors.groupingBy(new Function<ItemStack, String>() {

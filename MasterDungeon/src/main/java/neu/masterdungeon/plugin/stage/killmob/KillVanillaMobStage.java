@@ -30,6 +30,8 @@ public class KillVanillaMobStage extends MapAmountStage<EntityType, Integer> {
 
                 if (en.getHealth() - e.getFinalDamage() <= 0) {
                     stage.setProgress(entityType, stage.getProgress(entityType) + 1);
+                    dungeon.broadcast(BroadcastType.SUBTITLE,  StringUtils.format(entityType.toString()) + " §f"
+                            + stage.getProgress(entityType) + "/" + stage.getRequirement(entityType));
                 }
             }
         }

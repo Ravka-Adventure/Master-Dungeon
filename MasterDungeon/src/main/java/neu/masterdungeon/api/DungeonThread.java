@@ -51,6 +51,7 @@ public class DungeonThread extends BukkitRunnable {
                 timedCheckableStage.check(getDungeon());
             }
 
+            getDungeon().updateParticipants();
         } catch (Exception ex) {
             ex.printStackTrace();
             cancel();

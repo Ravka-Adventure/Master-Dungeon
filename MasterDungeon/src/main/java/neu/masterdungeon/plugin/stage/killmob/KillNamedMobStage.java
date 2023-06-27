@@ -1,10 +1,14 @@
 package neu.masterdungeon.plugin.stage.killmob;
 
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import neu.masterdungeon.MasterDungeon;
 import neu.masterdungeon.api.Dungeon;
 import neu.masterdungeon.api.stage.StageType;
+import neu.masterdungeon.api.stage.TimedCheckableStage;
 import neu.masterdungeon.api.stage.type.MapAmountStage;
 import neu.masterdungeon.api.utils.BroadcastType;
+import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +16,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import pdx.mantlecore.java.Pair;
 
-public class KillNamedMobStage extends MapAmountStage<String, Integer> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class KillNamedMobStage extends MapAmountStage<String, Integer> implements TimedCheckableStage {
 
     public static final Listener KILL_NAMED_MOB_STAGE_LISTENER = new Listener() {
         @EventHandler
@@ -30,10 +37,22 @@ public class KillNamedMobStage extends MapAmountStage<String, Integer> {
 
                 if (en.getHealth() - e.getFinalDamage() <= 0) {
                     stage.setProgress(name, stage.getProgress(name) + 1);
+                    dungeon.broadcast(BroadcastType.SUBTITLE, name + " §f"
+                            + stage.getProgress(name) + "/" + stage.getRequirement(name));
                 }
             }
         }
     };
+
+    private boolean autoSpawn = true;
+    private List<String> mythicMobIDs = new ArrayList<>();
+    private List<Location> spawnerLocations = new ArrayList<>();
+    private int amountPerSpawn = 5;
+    private int interval = 3;
+    private int totalSpawn = -1;
+
+    private int currentSec = 0;
+    private int spawnedCount = 0;
 
     public KillNamedMobStage(String stageName, int time, Pair<String, Integer>... requirements) {
         super(StageType.KILL_MOB, stageName, time);
@@ -60,4 +79,16 @@ public class KillNamedMobStage extends MapAmountStage<String, Integer> {
 
     }
 
+    @Override
+    public void run(Dungeon dungeon) {
+        if(!autoSpawn) return;
+
+        if(spawnedCount >= totalSpawn) return;
+
+        currentSec++;
+        if(currentSec % interval == 0) {
+            for(int )
+            MythicBukkit.inst().getMobManager().spawnMob()
+        }
+    }
 }
